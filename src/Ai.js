@@ -7,14 +7,14 @@ import LottieView from "lottie-react-native";
 
 export default function Ai({ route, navigation }) {
   const { name } = route.params;
-
+  const {classGrade}=route.params;
   const [isSpeakingDone, setIsSpeakingDone] = useState(false);
 
   const [fonts] = useFonts({
     baloo: require("../assets/fonts/static/Baloo2-ExtraBold.ttf"),
   });
 
-  const message = `Hello ${name}! Welcome to EBUDDY where learning mathematics can be your favourite game, press continue to begin`;
+  const message = `Hello ${name}! Welcome to EBUDDY lets start learning, press continue to begin`;
 //   useEffect(() => {
 //   Speech.getAvailableVoicesAsync().then(console.log);
 // }, []);
@@ -57,7 +57,7 @@ export default function Ai({ route, navigation }) {
   {isSpeakingDone && (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => navigation.navigate("Classroom")}
+      onPress={() => navigation.navigate("Classroom",{name,classGrade})}
     >
       <Text style={styles.buttonText}>Continue</Text>
     </TouchableOpacity>

@@ -4,6 +4,9 @@ import { Text, View, StyleSheet, ImageBackground, TouchableOpacity } from "react
 
 
 export default function Classroom(navigation){
+    const [fonts] = useFonts({
+        baloo: require("../assets/fonts/static/Baloo2-ExtraBold.ttf"),
+      });
     return(
         <ImageBackground style={styles.bg} source={require("../assets/background.png")} resizeMode="cover">
             <View>

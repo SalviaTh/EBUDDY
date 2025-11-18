@@ -3,10 +3,13 @@ import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } 
 import React,{useState} from 'react';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
+import { Picker } from "@react-native-picker/picker";
 
 
 export default function Login() {
   const [name,setName]=useState("");
+  const [classGrade, setClassGrade] = useState("");
+
   const navigation = useNavigation();
 
   const [fonts]=useFonts({
@@ -15,7 +18,7 @@ export default function Login() {
   const handleSubmit=()=>{
     // alert(name);
     if(!name.trim()) return;
-    navigation.navigate("Ai",{name});
+    navigation.navigate("Ai",{name,classGrade});
   };
   if (!fonts) {
   return null;
@@ -29,8 +32,34 @@ export default function Login() {
     <View style={styles.container}>
       <StatusBar style="light" />
       <Text style={styles.textfont}>Enter Name</Text>
-      <TextInput placeholder='Type your Name' style={styles.input} placeholderTextColor={"#999"} value={name} onChangeText={setName}></TextInput>
-      <TouchableOpacity onPress={handleSubmit} style={styles.button}><Text style={styles.buttonText}>Start Learning</Text></TouchableOpacity>
+      <TextInput 
+        placeholder='Type your Name' 
+        style={styles.input} 
+        placeholderTextColor={"#999"} 
+        value={name} 
+        onChangeText={setName}
+      />
+
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={classGrade}
+          onValueChange={(value) => setClassGrade(value)}
+          dropdownIconColor="#333"
+          style={styles.picker}
+          itemStyle={styles.pickerItem}
+        >
+          <Picker.Item label="Select Class" value="" />
+          <Picker.Item label="Class 1" value="1" />
+          <Picker.Item label="Class 2" value="2" />
+          <Picker.Item label="Class 3" value="3" />
+          <Picker.Item label="Class 4" value="4" />
+          <Picker.Item label="Class 5" value="5" />
+        </Picker>
+      </View>
+
+      <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+        <Text style={styles.buttonText}>Start Learning</Text>
+      </TouchableOpacity>
       
     </View>
     </ImageBackground>
@@ -42,9 +71,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor:"#FFF0C4",
-    // width:"80%",
-    // height:"20%",
   },
   bg:{
     flex:1,
@@ -56,7 +82,6 @@ const styles = StyleSheet.create({
     fontSize:38,
     fontWeight:'bold',
     fontFamily:'baloo',
-
   },
   input:{
     backgroundColor:"#edb5b1",
@@ -64,9 +89,26 @@ const styles = StyleSheet.create({
     padding:14,
     borderRadius:10,
     fontSize:18,
-    margin:20,
-    alignItems:'center',
-
+    marginTop:20,
+    marginBottom:20,
+    color:"#040303",
+  },
+  pickerContainer: {
+    backgroundColor: "#edb5b1",
+    width: "70%",
+    borderRadius: 10,
+    marginBottom: 20,
+    overflow: 'hidden',
+    justifyContent:'center',
+    height:50,
+  },
+  picker: {
+    color: "#333",
+    backgroundColor: "transparent",
+    fontSize: 18,
+  },
+  pickerItem: {
+    fontSize: 18,
   },
   button:{
     backgroundColor:"#ffbe25",
@@ -82,6 +124,5 @@ const styles = StyleSheet.create({
     fontSize:22,
     fontWeight:'bold',
     fontFamily:'baloo',
-
   },
 });
