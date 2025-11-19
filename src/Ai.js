@@ -14,7 +14,8 @@ export default function Ai({ route, navigation }) {
     baloo: require("../assets/fonts/static/Baloo2-ExtraBold.ttf"),
   });
 
-  const message = `Hello ${name}! Welcome to EBUDDY lets start learning, press continue to begin`;
+  const message = `Hello ${name}! You are in Class ${classGrade}. Let's start learning!`;
+
 //   useEffect(() => {
 //   Speech.getAvailableVoicesAsync().then(console.log);
 // }, []);
